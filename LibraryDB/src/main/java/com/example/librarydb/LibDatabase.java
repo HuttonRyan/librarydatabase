@@ -81,7 +81,7 @@ public class LibDatabase {
         builder.show();
     }
 
-    public void UpdateData(Context context, Button btnViewUpdate, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+    public static void UpdateData(Context context, Button btnViewUpdate, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
                            EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnViewUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +101,7 @@ public class LibDatabase {
         });
     }
 
-    public void DeleteData(Context context, Button btnDelete, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+    public static void DeleteData(Context context, Button btnDelete, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
                            EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
