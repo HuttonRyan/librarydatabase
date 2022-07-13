@@ -2,6 +2,7 @@ package com.example.librarydb;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -78,5 +79,38 @@ public class DBHelper extends SQLiteOpenHelper {
         else {
             return true;
         }
+    }
+
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
+    }
+
+    public boolean updateData(String eventTime, String serialNum, String appId, String userId, String location,
+                              String route, String day, String logger, String eventNbr, String addtDesc, String addtNbr){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(EVENT_TIME, eventTime);
+        contentValues.put(SERIAL_NBR, serialNum);
+        contentValues.put(APP_ID, appId);
+        contentValues.put(USER_ID, userId);
+        contentValues.put(LOC, location);
+        contentValues.put(RTE, route);
+        contentValues.put(DAY, day);
+        contentValues.put(LOGGER, logger);
+        contentValues.put(EVENT_NBR, eventNbr);
+        contentValues.put(ADDT_DESC, addtDesc);
+        contentValues.put(ADDT_NBR, addtNbr);
+
+        db.update(TABLE_NAME, contentValues, "id = ?", new String[] {EVENT_TIME});
+        return true;
+    }
+
+    public Integer deleteData(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
     }
 }
