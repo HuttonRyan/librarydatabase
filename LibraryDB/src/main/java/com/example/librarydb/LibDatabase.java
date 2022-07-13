@@ -11,12 +11,16 @@ import androidx.appcompat.app.AlertDialog;
 
 public class LibDatabase {
 
-    DBHelper myDb;
+    /*DBHelper myDb;
+
     Context context;
     EditText editEvent, serialNbr, appId, userId, loc, route, day, logger, eventNbr, addtDesc, addtNbr;
     Button btnAddData, btnViewAll, btnViewUpdate, btnDelete;
 
-    public void AddData(){
+     */
+
+    public static void AddData(Context context, Button btnAddData, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+                        EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,14 +39,15 @@ public class LibDatabase {
         });
     }
 
-    public void viewAll(){
+    public static void viewAll(Context context, Button btnViewAll, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+                               EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cursor res = myDb.getAllData();
 
                 if(res.getCount() == 0){
-                    showMessage("Error", "Nothing found");
+                    showMessage("Error", "Nothing found", context);
                     return;
                 }
                 else{
@@ -62,13 +67,13 @@ public class LibDatabase {
                         buffer.append("AddtNbr :" + res.getString(10) + "\n\n");
                     }
 
-                    showMessage("Data", buffer.toString());
+                    showMessage("Data", buffer.toString(), context);
                 }
             }
         });
     }
 
-    public void showMessage(String title, String message){
+    public static void showMessage(String title, String message, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
         builder.setTitle(title);
@@ -76,7 +81,8 @@ public class LibDatabase {
         builder.show();
     }
 
-    public void UpdateData(){
+    public void UpdateData(Context context, Button btnViewUpdate, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+                           EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnViewUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +101,8 @@ public class LibDatabase {
         });
     }
 
-    public void DeleteData(){
+    public void DeleteData(Context context, Button btnDelete, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+                           EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

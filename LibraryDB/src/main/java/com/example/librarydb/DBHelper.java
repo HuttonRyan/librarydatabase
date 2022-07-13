@@ -41,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "create table " + TABLE_NAME + " (Event_Time text, Serial_Nbr text, App_ID text, User_ID text, Location_Nbr text, " +
+        String query = "create table " + TABLE_NAME + " (Event_Time text primary key, Serial_Nbr text, App_ID text, User_ID text, Location_Nbr text, " +
                 "Route_Nbr text, Day text, Logger text, Event_Nbr text, Addit_Description text, Addit_Nbr text)";
 
         db.execSQL(query);
@@ -105,7 +105,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(ADDT_DESC, addtDesc);
         contentValues.put(ADDT_NBR, addtNbr);
 
-        db.update(TABLE_NAME, contentValues, "id = ?", new String[] {EVENT_TIME});
+        db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {EVENT_TIME});
         return true;
     }
 
