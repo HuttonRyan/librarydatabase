@@ -1,4 +1,4 @@
-package com.example.librarydb;
+//package com.example.librarydb;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,25 +9,30 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+/*
 public class LibDatabase {
 
-    /*DBHelper myDb;
 
+    //DBHelper myDb = new DBHelper(this);
+
+    /*
     Context context;
     EditText editEvent, serialNbr, appId, userId, loc, route, day, logger, eventNbr, addtDesc, addtNbr;
     Button btnAddData, btnViewAll, btnViewUpdate, btnDelete;
 
-     */
+
 
     public static void AddData(Context context, Button btnAddData, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
                         EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isInserted = myDb.insertData(editEvent.getText().toString(),serialNbr.getText().toString(),appId.getText().toString(),
+               /* boolean isInserted = myDb.insertData(editEvent.getText().toString(),serialNbr.getText().toString(),appId.getText().toString(),
                         userId.getText().toString(),loc.getText().toString(),route.getText().toString(),
                         day.getText().toString(),logger.getText().toString(),eventNbr.getText().toString(),
                         addtDesc.getText().toString(),addtNbr.getText().toString());
+
+
 
                 if (isInserted){
                     Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
@@ -37,12 +42,12 @@ public class LibDatabase {
                 }
             }
         });
+
+
     }
 
-    public static void viewAll(Context context, Button btnViewAll, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
-                               EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
+    public void viewAll(Context context, Button btnViewAll, DBHelper myDb){
         btnViewAll.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 Cursor res = myDb.getAllData();
 
@@ -81,7 +86,8 @@ public class LibDatabase {
         builder.show();
     }
 
-    public static void UpdateData(Context context, Button btnViewUpdate, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+    public void UpdateData(Context context, Button btnViewUpdate, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
+
                            EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
         btnViewUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,8 +107,9 @@ public class LibDatabase {
         });
     }
 
-    public static void DeleteData(Context context, Button btnDelete, DBHelper myDb, EditText editEvent, EditText serialNbr, EditText appId, EditText userId,
-                           EditText loc, EditText route, EditText day, EditText logger, EditText eventNbr, EditText addtDesc, EditText addtNbr){
+
+
+    public static void DeleteData(Context context, Button btnDelete, DBHelper myDb, EditText editEvent){
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,3 +125,5 @@ public class LibDatabase {
         });
     }
 }
+
+ */

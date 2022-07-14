@@ -5,11 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    public static final String KEY = "ID";
     public static final String DATABASE_NAME = "Enterprise Logging";
     public static final String TABLE_NAME = "application_table";
     public static final String EVENT_TIME = "Event_Time";
@@ -41,7 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "create table " + TABLE_NAME + " (Event_Time text primary key, Serial_Nbr text, App_ID text, User_ID text, Location_Nbr text, " +
+        String query = "create table " + TABLE_NAME + " (id integer primary key, Event_Time text, Serial_Nbr text, App_ID text, User_ID text, Location_Nbr text, " +
                 "Route_Nbr text, Day text, Logger text, Event_Nbr text, Addit_Description text, Addit_Nbr text)";
 
         db.execSQL(query);
@@ -53,12 +56,13 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String eventTime, String serialNum, String appId, String userId, String location,
+    public boolean insertData(String id, String eventTime, String serialNum, String appId, String userId, String location,
                               String route, String day, String logger, String eventNbr, String addtDesc, String addtNbr){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put(KEY, id);
         contentValues.put(EVENT_TIME, eventTime);
         contentValues.put(SERIAL_NBR, serialNum);
         contentValues.put(APP_ID, appId);
@@ -83,16 +87,53 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+
+        if(res.getCount() == 0){
+           // showMessage("Error", "Nothing found", context);
+        }
+        else{
+            StringBuffer buffer = new StringBuffer();
+            // EVENT_TIME, SERIAL_NBR, APP_ID, USER_ID, LOC, RTE, DAY, LOGGER, EVENT_NBR, ADDT_DESC, ADDT_NBR
+            while (res.moveToNext()){
+                buffer.append("ID :" + res.getString(0) + "\n");
+                buffer.append("EventTime :" + res.getString(1) + "\n");
+                buffer.append("SerialNbr :" + res.getString(2) + "\n");
+                buffer.append("AppId :" + res.getString(3) + "\n");
+                buffer.append("UserId :" + res.getString(4) + "\n");
+                buffer.append("Loc :" + res.getString(5) + "\n");
+                buffer.append("Rte :" + res.getString(6) + "\n");
+                buffer.append("Day :" + res.getString(7) + "\n");
+                buffer.append("Logger :" + res.getString(8) + "\n");
+                buffer.append("EventNbr :" + res.getString(9) + "\n");
+                buffer.append("AddtDesc :" + res.getString(10) + "\n");
+                buffer.append("AddtNbr :" + res.getString(11) + "\n\n");
+            }
+
+         //   showMessage("Data", buffer.toString());
+        }
+
         return res;
     }
 
-    public boolean updateData(String eventTime, String serialNum, String appId, String userId, String location,
+    /*public void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(DBHelper.this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
+    }
+
+     */
+
+    public boolean updateData(String id, String eventTime, String serialNum, String appId, String userId, String location,
                               String route, String day, String logger, String eventNbr, String addtDesc, String addtNbr){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put(KEY, id);
         contentValues.put(EVENT_TIME, eventTime);
         contentValues.put(SERIAL_NBR, serialNum);
         contentValues.put(APP_ID, appId);
@@ -105,12 +146,22 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(ADDT_DESC, addtDesc);
         contentValues.put(ADDT_NBR, addtNbr);
 
-        db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {EVENT_TIME});
+        db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {KEY});
         return true;
     }
 
     public Integer deleteData(String id){
         SQLiteDatabase db = this.getWritableDatabase();
+
+        /*if (db.delete(TABLE_NAME, "ID = ?", new String[] {id}) > 0){
+            Toast.makeText(this, "Data Deleted", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this, "Data not Deleted", Toast.LENGTH_LONG).show();
+        }
+
+         */
+
         return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
     }
 }
