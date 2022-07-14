@@ -56,13 +56,13 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String id, String eventTime, String serialNum, String appId, String userId, String location,
+    public boolean insertData(String eventTime, String serialNum, String appId, String userId, String location,
                               String route, String day, String logger, String eventNbr, String addtDesc, String addtNbr){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(KEY, id);
+        //contentValues.put(KEY, id);
         contentValues.put(EVENT_TIME, eventTime);
         contentValues.put(SERIAL_NBR, serialNum);
         contentValues.put(APP_ID, appId);
