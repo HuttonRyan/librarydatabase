@@ -90,7 +90,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
 
-        if(res.getCount() == 0){
+        /*if(res.getCount() == 0){
            // showMessage("Error", "Nothing found", context);
         }
         else{
@@ -113,6 +113,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
          //   showMessage("Data", buffer.toString());
         }
+
+         */
 
         return res;
     }
