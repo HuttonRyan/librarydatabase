@@ -152,7 +152,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Integer deleteData(Integer id){
+    public long deleteData(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
         /*if (db.delete(TABLE_NAME, "ID = ?", new String[] {id}) > 0){
@@ -164,6 +164,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
          */
 
-        return db.delete(TABLE_NAME, "ID = ?", new String[] {Integer.toString(id)});
+        return db.delete(TABLE_NAME, "ID = " + id, null );// new String[] {Integer.toString(id)});
     }
 }
