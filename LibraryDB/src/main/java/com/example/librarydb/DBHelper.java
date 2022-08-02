@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String KEY = "ID";
+    /*public static final String KEY = "ID";
     public static final String DATABASE_NAME = "Enterprise Logging";
     public static final String TABLE_NAME = "application_table";
     public static final String EVENT_TIME = "Event_Time";
@@ -27,27 +27,29 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ADDT_DESC = "Addit_Description";
     public static final String ADDT_NBR = "Addit_Nbr";
 
-    // EVENT_TIME, SERIAL_NBR, APP_ID, USER_ID, LOC, RTE, DAY, LOGGER, EVENT_NBR, ADDT_DESC, ADDT_NBR
-
-    /*
-    public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
-
      */
+
+    public static final String TABLE_NAME = "login_table";
+    public static final String NAME = "Name";
+    public static final String EMAIL = "Email";
+    public static final String PASSWORD = "Password";
+    public static final String DOB = "DOB";
+    public static final String GENDER = "Gender";
 
     public DBHelper(Context context){
 
-        super(context, DATABASE_NAME, null, 1);
+        super(context, "SQLiteLogin", null, 1);
         //SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "create table " + TABLE_NAME + " (id integer primary key, Event_Time text, Serial_Nbr text, App_ID text, User_ID text, Location_Nbr text, " +
+        /*String query = "create table " + TABLE_NAME + " (id integer primary key, Event_Time text, Serial_Nbr text, App_ID text, User_ID text, Location_Nbr text, " +
                 "Route_Nbr text, Day text, Logger text, Event_Nbr text, Addit_Description text, Addit_Nbr text)";
 
-        db.execSQL(query);
+         */
+        String newquery = "create table " + TABLE_NAME + "(id integer primary key, Name text, Email text, Password text, DOB text, Gender text)";
+        db.execSQL(newquery);
     }
 
     @Override
@@ -56,6 +58,27 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public boolean addNewEntry(String name, String email, String password, String dob, String gender){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(NAME, name);
+        contentValues.put(EMAIL, email);
+        contentValues.put(PASSWORD, password);
+        contentValues.put(DOB, dob);
+        contentValues.put(GENDER, gender);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
+        if (result == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    /*
     public boolean insertData(String eventTime, String serialNum, String appId, String userId, String location,
                               String route, String day, String logger, String eventNbr, String addtDesc, String addtNbr){
 
@@ -116,8 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
          */
 
-        return res;
-    }
+        //return res;
 
     /*public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(DBHelper.this);
@@ -128,7 +150,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
      */
-
+/*
     public boolean updateData(String id, String eventTime, String serialNum, String appId, String userId, String location,
                               String route, String day, String logger, String eventNbr, String addtDesc, String addtNbr){
 
@@ -162,8 +184,8 @@ public class DBHelper extends SQLiteOpenHelper {
             Toast.makeText(this, "Data not Deleted", Toast.LENGTH_LONG).show();
         }
 
+        return db.delete(TABLE_NAME, "ID = " + id, null );// new String[] {Integer.toString(id)});
          */
 
-        return db.delete(TABLE_NAME, "ID = " + id, null );// new String[] {Integer.toString(id)});
-    }
 }
+
