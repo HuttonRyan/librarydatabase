@@ -1,5 +1,6 @@
 package com.example.librarydb;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -76,6 +77,16 @@ public class DBHelper extends SQLiteOpenHelper {
         else {
             return true;
         }
+    }
+
+    @SuppressLint("Range")
+    public String retrieveData(String blah) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME + " where " + EMAIL + " = " + blah + " or " + PASSWORD + " = " + blah, null);
+
+        return res.getString(res.getPosition());
     }
 
     /*
