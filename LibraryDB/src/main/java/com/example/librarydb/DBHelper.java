@@ -96,6 +96,8 @@ public class DBHelper extends SQLiteOpenHelper {
             return "";
         }
 
+        res.close();
+
         return res.getString(1);
     }
 
