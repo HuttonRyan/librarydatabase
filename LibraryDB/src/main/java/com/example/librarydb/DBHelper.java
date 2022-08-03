@@ -80,13 +80,23 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public String retrieveData(String blah) {
+    public String retrieveData(String email, String password) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME + " where " + EMAIL + " = " + blah + " or " + PASSWORD + " = " + blah, null);
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME + " where " + EMAIL + " = " + email + " and " + PASSWORD + " = " + password, null);
 
-        return res.getString(res.getPosition());
+        if(res.getCount() == 0) {
+            return null;
+        }
+
+        res.moveToFirst();
+
+        if (res.getString(1 ).equals(null)){
+            return "";
+        }
+
+        return res.getString(1);
     }
 
     /*
