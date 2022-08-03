@@ -92,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         res.moveToFirst();
 
-        if (res.getString(1 ).equals(null)){
+        if (res.getString(1 ) == null){
             return "";
         }
 
