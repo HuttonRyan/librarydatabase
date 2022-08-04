@@ -85,9 +85,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         //Pay attention to the apostrophes in the below query
-        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " ='" + email + "' AND " + PASSWORD + " = '" + password, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " ='" + email + "' AND " + PASSWORD + " = '" + password, null);
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
         if(cursor.getCount() == 0) {
             return null;
