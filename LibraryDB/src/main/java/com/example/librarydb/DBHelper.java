@@ -11,6 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+
+// Current code is applied to the SQLite project.
+
 public class DBHelper extends SQLiteOpenHelper {
 
     /*public static final String KEY = "ID";
@@ -79,6 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    // For SQLite project
     @SuppressLint("Range")
     public String retrieveData(String email, String password) {
 
@@ -103,6 +107,26 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return result;
+
+        // Below is a more correct way to use this method with how I intended to use on on the SQLLite project:
+        /*
+        Cursor cursor = db.rawQueyr("SELECT * FROM " + TABLE_NAME + ", null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()){
+                String currentEmail = cursor.getString(2);
+                String currentPassword = cursor.getString(3);
+                if(currentEmail.equals(email) && currentPassword.equals(password)){
+                    String name = cursor.getString(1);
+                    if (name == null){
+                        return "";
+                    }
+                    return name;
+                }
+           }
+           return null;
+        }
+        return null;
+         */
     }
 
     /*
