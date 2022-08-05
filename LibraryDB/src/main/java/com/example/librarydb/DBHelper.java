@@ -14,6 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 
 // Current code is applied to the SQLite project.
 
+// Commented code may be useful to answer questions for furture projects.
+
 public class DBHelper extends SQLiteOpenHelper {
 
     /*public static final String KEY = "ID";
@@ -113,8 +115,18 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQueyr("SELECT * FROM " + TABLE_NAME + ", null);
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()){
+                // Get the data from the 3rd column, i.e. "Email"
                 String currentEmail = cursor.getString(2);
+
+                // Get the data from the 4th column, i.e. "Password"
                 String currentPassword = cursor.getString(3);
+
+
+                // Another way to write the two above lines are:
+
+                String currentEmail = cursor.getString(cursor.getColumnIndex("Email"));
+                String currentPassword = cursor.getString(cursor.getColumnIndex("Password"));
+
                 if(currentEmail.equals(email) && currentPassword.equals(password)){
                     String name = cursor.getString(1);
                     if (name == null){
